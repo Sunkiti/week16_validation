@@ -10,7 +10,7 @@ const owner = document.getElementsByName('owner');
 console.log(owner);
 const typeOfPayment = document.getElementsByName('typeofpayment');
 console.log(typeOfPayment);
-const result = document.getElementsById('result');
+const result = document.getElementById('result');
 console.log(result);
 const btn = document.querySelector('.btn');
 btn.addEventListener('click', () => {
@@ -20,7 +20,7 @@ btn.addEventListener('click', () => {
 	let selectedState = "";
 	let selectedOwner = "";
 	let selectedTypeOfPayment = "";
-}
+
 // let result = "";
 // Получение выбранного топлива
 for (const fuelOption of fuel) {
@@ -47,8 +47,9 @@ for (const paymentOption of typeOfPayment) {
 	if (paymentOption.checked) {
 		selectedTypeOfPayment = paymentOption.value;
 		break;
+		}
 	}
-}}
+}
 	// Расчет цены в зависимости от выбранных параметров
 	let price = calculatePrice(
 		selectedModel,
@@ -65,16 +66,15 @@ result.innerHTML = `
 	<div class="newold">Состояние: ${selectedState}</div>
 	<div class="owners">Кол-во владельцев: ${selectedOwner}</div>
 	<div class="payment">Тип оплаты: ${selectedTypeOfPayment}</div>
-	<div class="price">Цена: ${}</div>
+	<div class="price">Цена: </div>
 	`;
-);
+});
 // Функция для расчета цены автомобиля
-const calculatePrice = () =>
+const calculatePrice = () => {
 	// Твой код
     selectedFuel + selectedEngineVolume + selectedState + selectedOwner + selectedTypeOfPayment;
-	{
-		let basePrice = 0;
-		// Расчет базовой цены в зависимости от выбранной модели
+let basePrice = 0;
+// Расчет базовой цены в зависимости от выбранной модели
 switch (model) {
 	case "Reno":
 		basePrice = 10000;
