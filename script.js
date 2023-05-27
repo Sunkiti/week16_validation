@@ -1,6 +1,6 @@
 const model = document.getElementById('model');
 console.log(model);
-const fuel = document.getElementsByName('fuel');
+const fuel = document.querySelectorAll('input[name="fuel"]');
 console.log(fuel);
 const engineVolume = document.getElementById('enginevolume');
 console.log(engineVolume);
@@ -14,12 +14,30 @@ const result = document.getElementById('result');
 console.log(result);
 const btn = document.querySelector('.btn');
 btn.addEventListener('click', () => {
-    let selectedModel = model.value;
-	let selectedFuel = "";
-	let selectedEngineVolume = engineVolume.value;
-	let selectedState = "";
-	let selectedOwner = "";
-	let selectedTypeOfPayment = "";
+	// result.innerHTML = `<p>hello!</p>`
+	const basePrice = model.value;
+	let fuelTypePrice = '';//переменная в которой будет храниться цена за тип топлива
+	
+	for (const elem of fuel) {
+		if ( elem.checked) {
+		fuelTypePrice = elem.value;
+		}
+	}
+	// Учет объема двигателя
+	if (engineVolume >= 1.1 && engineVolume <= 2.0) {
+		basePrice + 100;
+	} else if (engineVolume > 2.0 && engineVolume <= 3.5) {
+		basePrice + 300;
+	}
+	const res = Number (basePrice) + Number (fuelTypePrice);
+	result.innerHTML = `<p>${res}</p>`;
+
+    // let selectedModel = model.value;
+	// let selectedFuel = "";
+	// let selectedEngineVolume = engineVolume.value;
+	// let selectedState = "";
+	// let selectedOwner = "";
+	// let selectedTypeOfPayment = "";
 
 // let result = "";
 // Получение выбранного топлива
@@ -51,58 +69,44 @@ for (const paymentOption of typeOfPayment) {
 	}
 }
 	// Расчет цены в зависимости от выбранных параметров
-	let price = calculatePrice(
-		selectedModel,
-		selectedFuel,
-		selectedEngineVolume,
-		selectedState,
-		selectedOwner,
-		selectedTypeOfPayment
-	);
-result.innerHTML = `
-	<div class="car">Модель: ${selectedModel}</div>
-	<div class="engine">Тип двигателя: ${selectedFuel}</div>
-	<div class="volume">Объем двигателя: ${selectedEngineVolume}</div>
-	<div class="newold">Состояние: ${selectedState}</div>
-	<div class="owners">Кол-во владельцев: ${selectedOwner}</div>
-	<div class="payment">Тип оплаты: ${selectedTypeOfPayment}</div>
-	<div class="price">Цена: </div>
-	`;
+	// let price = calculatePrice(
+	// 	selectedModel,
+	// 	selectedFuel,
+	// 	selectedEngineVolume,
+	// 	selectedState,
+	// 	selectedOwner,
+	// 	selectedTypeOfPayment
+	// );
+// result.innerHTML = `
+// 	<div class="car">Модель: ${selectedModel}</div>
+// 	<div class="engine">Тип двигателя: ${selectedFuel}</div>
+// 	<div class="volume">Объем двигателя: ${selectedEngineVolume}</div>
+// 	<div class="newold">Состояние: ${selectedState}</div>
+// 	<div class="owners">Кол-во владельцев: ${selectedOwner}</div>
+// 	<div class="payment">Тип оплаты: ${selectedTypeOfPayment}</div>
+// 	<div class="price">Цена: </div>
+// 	`;
 });
 // Функция для расчета цены автомобиля
 const calculatePrice = () => {
 	// Твой код
     selectedFuel + selectedEngineVolume + selectedState + selectedOwner + selectedTypeOfPayment;
 let basePrice = 0;
-// Расчет базовой цены в зависимости от выбранной модели
-switch (model) {
-	case "Reno":
-		basePrice = 10000;
-		break;
-	case "Opel":
-        basePrice = 20000;
-        break;
-    case "Mazda":
-        basePrice = 35000;
-        break;
-    case "Jaguar":
-        basePrice = 50000;
-        break
-}
+
 // Учет типа топлива
 switch (fuel) {
 	case "Бензин":
-		basePrice += 1000;
-		break;
+	basePrice += 1000;
+	break;
     case "Дизель":
-        basePrice += 500;
-        break;
+	basePrice += 500;
+	break;
     case "Газ":
-		basePrice += 700;
-		break;
+	basePrice += 700;
+	break;
     case "Электричество":
-		basePrice += 1500;
-		break;
+	basePrice += 1500;
+	break;
 }
 // Учет объема двигателя
 if (engineVolume >= 1.1 && engineVolume <= 2.0) {
@@ -128,13 +132,13 @@ if (owner === "1-2 владельца") {
 switch (typeOfPayment) {
 	case "Картой":
 		//Твой код
-		break;
+	break;
 	case "Наличными":
 		//Твой код
-		break;
+	break;
 	case "Счет на юридическое лицо":
 		//Твой код
-		break;
+	break;
 	}
 	return basePrice;
 };
