@@ -24,10 +24,11 @@ btn.addEventListener('click', () => {
 		}
 	}
 	// Учет объема двигателя
-	if (engineVolume >= 1.1 && engineVolume <= 2.0) {
-		basePrice + 100;
-	} else if (engineVolume > 2.0 && engineVolume <= 3.5) {
-		basePrice + 300;
+	let engineVolumePay = 0;
+	if (engineVolume.value >= 1.1 && engineVolume.value <= 2.0) {
+		engineVolumePay = 100;
+	} else if (engineVolume.value > 2.0 && engineVolume.value <= 3.5) {
+		engineVolumePay = 300;
 	}
 	let stateOfTheCar = ''; 
 	// переменная в которой будет храниться цена за состояние авто
@@ -52,7 +53,7 @@ btn.addEventListener('click', () => {
 		payment = elem.value;
 		}
 	}
-	const res = Number (basePrice) + Number (fuelTypePrice) + Number (stateOfTheCar) + Number (ownersNumber) + Number (payment);
+	const res = Number (basePrice) + Number (fuelTypePrice) + Number (stateOfTheCar) + Number (ownersNumber) + Number (payment) + Number (engineVolumePay);
 	result.innerHTML = `<p>${res}</p>`;
 
     // let selectedModel = model.value;
